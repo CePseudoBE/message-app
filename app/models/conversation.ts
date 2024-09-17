@@ -6,7 +6,7 @@ import Message from '#models/message'
 
 export default class Conversation extends BaseModel {
   @column({ isPrimary: true })
-  declare id: number
+  declare id: string
 
   @manyToMany(() => User)
   declare users: ManyToMany<typeof User>
