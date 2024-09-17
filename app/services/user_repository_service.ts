@@ -20,4 +20,14 @@ export default class UserRepository {
       throw Error("Impossible de créer l'utilisateur")
     }
   }
+
+  async getMany(ids: number[]): Promise<User[] | null> {
+    const users = await User.findManyBy('id', ids)
+
+    if (users) {
+      return users
+    } else {
+      return null
+    }
+  }
 }

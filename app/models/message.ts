@@ -9,10 +9,13 @@ export default class Message extends BaseModel {
   declare id: number
 
   @column()
+  declare content: string
+
+  @column()
   declare userId: number
 
   @column()
-  declare conversationId: number
+  declare conversationId: string
 
   @belongsTo(() => User)
   declare user: BelongsTo<typeof User>
