@@ -1,6 +1,6 @@
 import Conversation from '#models/conversation'
 
-export default class UserRepository {
+export default class ConversationRepository {
   async create() {
     const uid = crypto.randomUUID()
     const conversation = await Conversation.create({ id: uid })
