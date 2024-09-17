@@ -11,7 +11,8 @@ export default class AuthController {
     const { email, password } = request.only(['email', 'password'])
     const user = await User.verifyCredentials(email, password)
     await auth.use('web').login(user)
-    return response.redirect('/dashboard')
+    response.redirect('/conversations')
+    return
   }
 
   async register({ request, response, auth }: HttpContext) {
@@ -19,17 +20,21 @@ export default class AuthController {
     try {
       const user = await this.userRepository.create({ email, password, fullName })
       await auth.use('web').login(user)
-      return response.redirect('/dashboard')
+      response.redirect('/conversations')
+      return
     } catch (e) {
-      return response.badRequest(e.message)
+      response.badRequest(e.message)
+      return
     }
   }
 
-  index({ inertia, auth, response }: HttpContext) {
-    console.log(auth.isAuthenticated)
-    if (auth.isAuthenticated) {
-      return response.redirect('/messages')
-    }
-    return inertia.render('register')
+  index({ inertia }: HttpContext) {
+    inertia.render('register')
+    return
+  }
+
+  show({ inertia }: HttpContext) {
+    inertia.render('login')
+    return
   }
 }

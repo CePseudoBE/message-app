@@ -13,10 +13,21 @@ import router from '@adonisjs/core/services/router'
 import { middleware } from '#start/kernel'
 router.on('/').renderInertia('home', { version: 6 })
 
-router.post('login', [AuthController, 'login'])
-router.post('register', [AuthController, 'register'])
+router
+  .group(() => {
+    router.post('', [AuthController, 'login'])
+    router.get('', [AuthController, 'show'])
+  })
+  .prefix('login')
+  .use(middleware.guest())
 
-router.get('register', [AuthController, 'index'])
+router
+  .group(() => {
+    router.post('', [AuthController, 'register'])
+    router.get('', [AuthController, 'index'])
+  })
+  .prefix('register')
+  .use(middleware.guest())
 
 router
   .group(() => {

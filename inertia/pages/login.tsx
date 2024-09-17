@@ -1,37 +1,22 @@
 import { Head, useForm } from '@inertiajs/react'
 
-export default function Home(props: { version: number }) {
+export default function Login() {
   const { data, setData, post, processing, errors } = useForm({
-    fullName: '',
     email: '',
     password: '',
   })
 
   function handleSubmit(e: React.FormEvent) {
     e.preventDefault()
-    post('/register')
+    post('/login')
   }
 
   return (
     <>
-      <Head title="Register" />
+      <Head title="Homepage" />
 
       <div className="container">
-        <div className="title">AdonisJS {props.version} x Inertia x React</div>
-
         <form onSubmit={handleSubmit}>
-          <div className="form-group">
-            <label htmlFor="fullName">Full Name</label>
-            <input
-              type="text"
-              id="fullName"
-              value={data.fullName}
-              onChange={(e) => setData('fullName', e.target.value)}
-              className="form-control"
-            />
-            {errors.fullName && <span>{errors.fullName}</span>}
-          </div>
-
           <div className="form-group">
             <label htmlFor="email">Email</label>
             <input
@@ -57,7 +42,7 @@ export default function Home(props: { version: number }) {
           </div>
 
           <button type="submit" className="btn btn-primary" disabled={processing}>
-            Register
+            Login
           </button>
         </form>
       </div>
