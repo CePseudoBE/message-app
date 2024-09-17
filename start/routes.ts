@@ -8,7 +8,18 @@
 */
 
 import AuthController from '#controllers/auth_controller'
+import ConversationsController from '#controllers/conversations_controller'
 import router from '@adonisjs/core/services/router'
+import { middleware } from '#start/kernel'
 router.on('/').renderInertia('home', { version: 6 })
 
 router.post('login', [AuthController, 'login'])
+router.post('register', [AuthController, 'register'])
+
+router.get('register', [AuthController, 'index'])
+
+router
+  .group(() => {
+    router.get('', [ConversationsController, 'index']).use(middleware.auth())
+  })
+  .prefix('conversations')

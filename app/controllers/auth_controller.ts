@@ -24,4 +24,12 @@ export default class AuthController {
       return response.badRequest(e.message)
     }
   }
+
+  index({ inertia, auth, response }: HttpContext) {
+    console.log(auth.isAuthenticated)
+    if (auth.isAuthenticated) {
+      return response.redirect('/messages')
+    }
+    return inertia.render('register')
+  }
 }
