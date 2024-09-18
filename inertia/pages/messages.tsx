@@ -1,4 +1,5 @@
 import { Head, usePage } from '@inertiajs/react'
+import NewConversation from '~/components/conversations/NewConversation'
 
 interface User {
   fullName: string
@@ -10,13 +11,17 @@ interface PageProps {
   [key: string]: unknown
 }
 
-export default function Messages() {
-  const { user } = usePage<PageProps>().props
+interface Props {
+  users: User[]
+}
+
+export default function Messages({ users }: Props) {
+  //const { user } = usePage<PageProps>().props
 
   return (
     <>
       <Head title="Messages" />
-      <div>{user.fullName}</div>
+      <NewConversation users={users} />
     </>
   )
 }

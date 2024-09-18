@@ -30,4 +30,10 @@ export default class UserRepository {
       return null
     }
   }
+
+  async getAllUserButNotAuth(id: number): Promise<User[]> {
+    const users = await User.query().whereNot('id', id)
+
+    return users
+  }
 }

@@ -29,12 +29,10 @@ export default class AuthController {
   }
 
   index({ inertia }: HttpContext) {
-    inertia.render('register')
-    return
+    return inertia.render('register')
   }
 
   show({ inertia }: HttpContext) {
-    inertia.render('login')
-    return
+    return inertia.render('login')
   }
 }
