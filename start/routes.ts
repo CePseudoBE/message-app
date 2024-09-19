@@ -7,8 +7,8 @@
 |
 */
 
-import AuthController from '#controllers/auth_controller'
-import ConversationsController from '#controllers/conversations_controller'
+const AuthController = () => import('#controllers/auth_controller')
+const ConversationsController = () => import('#controllers/conversations_controller')
 import router from '@adonisjs/core/services/router'
 import { middleware } from '#start/kernel'
 router.on('/').renderInertia('home', { version: 6 })
